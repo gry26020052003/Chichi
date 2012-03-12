@@ -1,0 +1,55 @@
+input
+{
+			border-radius: 5px;
+}
+		
+#down_overlay 
+{
+        z-index: 10000;
+        filter: alpha(opacity=70); /*older IE*/
+        filter:progid:DXImageTransform.Microsoft.Alpha(opacity=80); /* IE */
+        -moz-opacity: .70; /*older Mozilla*/
+        -khtml-opacity: 0.7;   /*older Safari*/
+        opacity: 0.7;   /*supported by current Mozilla, Safari, and Opera*/
+        background-color:#000000;
+        position:fixed;
+        top:0px;
+        left:0px;
+        width:100%;
+        height:100%;
+        color:#FFFFFF;	
+        text-align:center;
+        vertical-align:middle;  
+}
+
+h2 
+{
+	color: red;
+	margin-left: 50px;
+}
+    
+tr
+{
+    text-align: right;
+    height: 75px;
+        	
+}
+
+table
+{
+	padding: 15px;
+}
+        
+#reg_form
+{
+	width: 650px; height: auto; position: absolute; border-radius:5px; display: block; z-index: 100001; background: white;
+}
+
+
+ul
+{
+
+	list-style: none;	
+	color:red;
+	position:absolute;
+}

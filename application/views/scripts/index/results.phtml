@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Creating a Facebook-like Registration Form with jQuery</title>
+<link rel="stylesheet" type="text/css" href="/chichi/public/css/results.css" />
+<script type="text/javascript" src="/chichi/public/js/jquery.js"></script>
+<script type="text/javascript" src="/chichi/public/js/tabs.js"> </script>
+</head>
+
+
+<body>
+		<div class="result_container">
+			<ol id="friend_list">
+					<?php
+						foreach($this->rows as $key => $value){
+							
+							$data = explode("hidden_b", $value);
+							echo "<li>";
+								echo "<img src = 'http://hdn.xnimg.cn/photos/hdn421/20101204/2225/tiny_jZOH_42167m019117.jpg' width='50' height='50' />";
+								echo "<div id='name'>";
+									echo "<span style='color: gray;'>";
+									echo "Name: ";
+									echo "</span>";							
+									echo $data[0];
+									echo "<div id='action'>";
+									echo "<u>";
+									echo "<a href='#' id='friendrequest_$data[1]'> Send a Message </a>";
+									echo "<br />";
+									echo "<a href='#' id='inbox_$data[1]'> Send a Message </a>";
+									echo "</u>";
+									echo "</div>";
+								echo "</div>";
+							
+							echo "</li>";
+							echo "<br />";
+
+						}
+					?>
+			</ol>			
+		</div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE HTML 5>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="/chichi/public/css/global.css" />
+    <script type="text/javascript" src="/chichi/public/js/prototype.js"></script>
+   	<title></title>   	
+<script type="text/javascript">
+	   Event.observe(window, 'load', function(){
+            Element.observe('register', 'click', function(){ 			
+					$(down_overlay).show();	
+					$(reg_form).show();	
+            	})
+			Element.observe('close_reg', 'click', function(){ 			
+					$(down_overlay).hide();		
+					$(reg_form).hide();	
+            	})           	           
+            });	
+</script>
+</head>
+<body>
+<div id="container">
+<div id="header_back">
+</div>
+ 	<?php echo $this->layout()->content ?>	
+ 	
+ </div>
+</body>
+</html>

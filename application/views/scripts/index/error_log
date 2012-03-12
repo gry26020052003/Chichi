@@ -1,0 +1,2 @@
+[11-Dec-2011 00:04:26] PHP Fatal error:  Using $this when not in object context in /home7/chichio1/public_html/chichi/application/views/scripts/index/index.phtml on line 3
+[11-Dec-2011 00:27:52] PHP Fatal error:  Using $this when not in object context in /home7/chichio1/public_html/chichi/application/views/scripts/index/index.phtml on line 3

@@ -1,0 +1,160 @@
+
+#down_overlay {
+        z-index: 10000;
+        filter: alpha(opacity=70); /*older IE*/
+        filter:progid:DXImageTransform.Microsoft.Alpha(opacity=80); /* IE */
+        -moz-opacity: .70; /*older Mozilla*/
+        -khtml-opacity: 0.7;   /*older Safari*/
+        opacity: 0.7;   /*supported by current Mozilla, Safari, and Opera*/
+        background-color:#000000;
+        position:fixed;
+        top:0px;
+        left:0px;
+        width:100%;
+        height:100%;
+        color:#FFFFFF;	
+        text-align:center;
+        vertical-align:middle;  
+}
+
+h2 
+{
+	color: red;
+	margin-left: 50px;
+}
+    
+tr
+{
+    
+}
+
+#reg_form
+{
+	border: 1px solid #B8D4E8;
+	background: #f0f5f8;
+}
+
+#reg_form 
+{
+	padding: 15px;
+	height: auto; 
+	position: fixed;
+	z-index: 100001;
+	width: 255px;  
+	border-radius:5px;
+	left: 50%;
+	margin-left: -122.5px;
+		
+}
+
+#reg_form table
+{
+	font-size: 10px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: none;	
+}
+
+
+#reg_form table tr
+{
+	text-align: right;
+	height: 35px;
+}
+
+#close_reg
+{
+	position:absolute;
+	left: 268px;
+	top: -10px;
+}
+
+#container 
+{
+	margin-left: auto;
+	margin-right: auto;
+	width: 960px;
+	height: auto;
+}
+#header_back
+{
+	height: 35px;
+	width: 960px;
+	background: #0099CC;
+
+}
+
+#body_content
+{
+	position: relative;
+	margin-top: 15px;
+}
+
+#body_content #login_box
+{
+	float: left;
+	background: #f0f5f8;
+	height: auto;
+	width: 200px;
+	position: relative;
+	border: 1px solid #B8D4E8;
+	color: black;
+}
+
+.incorr_pass
+{
+	width:80%;
+	height:45px;
+	background: #FEF1EC;
+	margin-left:15px;
+	padding-left: 25px;
+	color: #CD0A0A;
+	border: 1px solid #CD0A0A;
+	border-radius:5px;
+}
+
+#body_content #login_box table input submit
+{
+	position: absolute;
+	margin-left: 100px;
+}
+
+#body_content #back_image
+{	
+	float: left;
+}
+
+#body_content #back_image img
+{
+	margin-left: 100px;     
+}
+
+#body_content #login_box table
+{
+	margin:10px;
+	position: absolute;
+	width: 25%;
+	font-size: 12px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: none;
+	position: relative;
+}
+
+#body_content #login_box table tr
+{
+	text-align: left;
+}
+
+.suboo
+{
+	position: fixed;
+	margin-left: auto;
+	margin-right: auto;
+}
+ul
+{
+	margin-top:-1px;
+	list-style: none;	
+	color:red;
+	position:absolute;
+	font-weight: bold;
+}

@@ -1,0 +1,41 @@
+
+.result_container
+{
+	padding:10px;
+	position: relative;
+	border-top:1px solid #D8DFEA;
+	background: #F7F7F7;
+	width:720px;
+	height:auto;
+}
+#friend_list li
+{
+	list-style: none;
+	border:1px solid #D8DFEA;
+	background: white;
+	margin: 0.5em 0;
+	padding: 0.8em;
+	overflow: hidden;
+	zoom: 1;
+	padding-right: 25px;
+	margin-right: 35px;
+	
+}
+
+#friend_list li img
+{
+	float: left;	
+}
+
+#friend_list li #name
+{
+	margin-left: 60px;
+	color:#005EAC;
+}
+
+
+
+#friend_list li #action
+{
+	float:right;
+}

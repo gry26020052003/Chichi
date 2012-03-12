@@ -1,0 +1,97 @@
+<?php
+
+// set data
+$data = array(
+  'a','b','c','d','e',
+  'f','g','h','i','j',
+  'k','l','m','n','o',
+  'q','r','s','t','u',
+  'v','22','23','24','25',
+);// initialize pager with data set
+$pager = new Zend_Paginator(new Zend_Paginator_Adapter_Array($data));
+
+// set page number from request
+$currentPage = isset($_GET['p']) ? (int) htmlentities($_GET['p']) : 1;
+$pager->setCurrentPageNumber($currentPage);
+
+// set number of items per page from request
+$itemsPerPage = isset($_GET['c']) ? (int) htmlentities($_GET['c']) : 3;
+$pager->setItemCountPerPage($itemsPerPage);
+
+  // set number of pages in page range
+  $pager->setPageRange(5);
+
+
+  // get page data
+  $pages = $pager->getPages('Sliding');
+
+
+// create page links
+$pageLinks = array();
+$separator = ' | ';
+
+
+
+  // build first page link
+  $pageLinks[] = getLink($pages->first, $itemsPerPage, '<<');        
+
+  // build previous page link
+  if (!empty($pages->previous)) {
+    $pageLinks[] = getLink($pages->previous, $itemsPerPage, '<');
+  }
+
+foreach($pages->pagesInRange as $x) {
+
+  if ($x == $pages->current) {
+    $pageLinks[] = $x;
+  } else {
+    $pageLinks[] = getLink($x, $itemsPerPage, $x);
+  }
+}
+
+
+  // build next page link
+  if (!empty($pages->next)) {
+    $pageLinks[] = getLink($pages->next, $itemsPerPage, '�');
+  }  
+
+  // build last page link
+  $pageLinks[] = getLink($pages->last, $itemsPerPage, '�');   
+
+function getLink($page, $itemsPerPage, $label) {
+  $q = http_build_query(array(
+      'p' => $page,
+      'c' => $itemsPerPage
+    )
+  );
+  return "<a href=\"?$q\">$label</a>";
+}
+
+?>
+
+<html>
+  <head></head>
+  <body>
+    <div id="data">
+      <table border="1">
+        <tr>
+          <th>Item1</th>
+          <th>Item2</th>
+          <th>Item3</th>
+        </tr>
+      <?php foreach ($pager->getCurrentItems() as $item): ?>
+        <tr>
+          <td><?php echo htmlentities($item[0]); ?></td>
+
+        </tr>
+      <?php endforeach; ?>
+      </table>
+    </div>
+
+    <br/>
+
+    <div id="links">
+    Pages: <?php echo implode($pageLinks, $separator); ?>
+    </div>
+  </body>
+</html>
