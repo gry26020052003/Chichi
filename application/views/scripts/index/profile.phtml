@@ -40,34 +40,12 @@ function get_time_difference( $start)
 <title>Creating a Facebook-like Registration Form with jQuery</title>
 <link rel="stylesheet" type="text/css" href="/chichi/public/css/tabs.css" />
 <link rel="stylesheet" type="text/css" href="/chichi/public/css/style.css" />
+<link rel="stylesheet" type="text/css" href="/chichi/public/css/view.css" />
 <script type="text/javascript" src="/chichi/public/js/jquery.js"></script>
 <script type="text/javascript" src="/chichi/public/js/tabs.js"> </script>
+<script type="text/javascript" src="/chichi/public/js/view.js"> </script>
+<script type="text/javascript" src="/chichi/public/js/slider.js"> </script>
 
-<script type="text/javascript">
-		$(document).ready(function(){
-			   $("#zone-bar li em").click(function() {
-		   		var hidden = $(this).parents("li").children("ul").is(":hidden");		   		
-				$("#zone-bar>ul>li>ul").hide()        
-			   	$("#zone-bar>ul>li>a").removeClass();			   		
-			   	if (hidden) {
-			   		$(this)
-				   		.parents("li").children("ul").toggle()
-				   		.parents("li").children("a").addClass("zoneCur");
-				   	} 
-			   });
-			   	$("#firstpane p.menu_head").click(function()
-    {
-		$(this).css({backgroundImage:"url(down.png)"}).next("div.menu_body").slideToggle(300).siblings("div.menu_body").slideUp("slow");
-       	$(this).siblings().css({backgroundImage:"url(left.png)"});
-	});
-	//slides the element with class "menu_body" when mouse is over the paragraph
-	$("#secondpane p.menu_head").mouseover(function()
-    {
-	     $(this).css({backgroundImage:"url(down.png)"}).next("div.menu_body").slideDown(500).siblings("div.menu_body").slideUp("slow");
-         $(this).siblings().css({backgroundImage:"url(left.png)"});
-	});
-	});
-</script>
 
 <style type="text/css">
 .menu_list {
@@ -97,9 +75,31 @@ function get_time_difference( $start)
   color: #000000;
   text-decoration:underline;
   }
+  
+  #gallery {
+    padding: 30px;
+    background: #e1eef5;
+  }
+  #descriptions {
+    position: relative;
+    height: 50px;
+    background: #EEE;
+    margin-top: 10px;
+    width: 340px;
+    padding: 10px;
+    overflow: hidden;
+  }
+    #descriptions .ad-image-description {
+      position: absolute;
+    }
+      #descriptions .ad-image-description .ad-description-title {
+        display: block;
+      }
 </style>
+
 </head>
 <body>
+	<input type="hidden" value="<?php echo $this->current_user; ?>" id="current_user" />
 	<div id="page-wrap">			
 		<div id="zone-bar">
 			<ul>
@@ -220,12 +220,14 @@ function get_time_difference( $start)
 					</ul>
 				</li>
 				<li>
-					<a href="#"><span>
-						Offbeat &nbsp;
-						<em class="opener-offbeat">
-							<img src="/chichi/public/images/zonebar-downarrow.png" alt="dropdown" />
-						</em>
-					</span></a>
+					<input type="text" id="searc_friends" style="background: white url(http://a.xnimg.cn/imgpro/bg/cs_navtop.png?timestamp=091126) no-repeat left -175px;
+border: 1px solid #315091;
+float: left;
+height: 15px;
+margin: 0;
+padding: 3px 4px;
+width: 149px;
+margin-top: -3px;" />
 					<ul class="offbeatsublist">
 						<li><a href="#">Comedy</a></li>
 						<li><a href="#">Odd Stuff</a></li>
@@ -233,14 +235,19 @@ function get_time_difference( $start)
 						<li><a href="#">Pets &amp; Animals</a></li>
 					</ul>
 				</li>
+				
+		
 			</ul>			
 		</div>
+
+
+
 
 	
 	<div id="container" style=" width:1000px; margin-top: 62.5px; float: left; ">	
 			<div style="overflow:auto; height:25px;" id="message_box">	
 				<div style="float: left; margin-left:2.5px; font-size:1.7em;"><?php echo $this->current_user.": ";  ?> </div>	
-				<div style="float: left; margin-left:5px;" id="status_msg_box"><?php foreach($this->latest as $key => $value){echo $value;}?></div>	
+			<!--	<div style="float: left; margin-left:5px;" id="status_msg_box"><?php foreach($this->latest as $key => $value){echo $value;}?></div>	-->
 			</div>
 		<ul class="menu">
 			<li id="news" class="active">News</li>
@@ -256,64 +263,68 @@ function get_time_difference( $start)
 			</div>
 	
 			<div style="overflow:auto;" id="db_message_box">
-					<?php
-						foreach($this->data as $key => $row){
-							?>
-							<div id="leftside" style="float:left;">
-								<img src="http://hdn.xnimg.cn/photos/hdn421/20111205/1525/h_tiny_IM0v_6f9b00029d702f76.jpg" width="50" height="50">
-							</div>
-							<div id="rightside" style="margin-left: 55px;">
-							<?php
-							foreach($row as $key => $value){
-								 if($key == "date"){
-									$time = get_time_difference($value);
-									echo "<span style='color:blue;'>";
-									foreach($time as $key => $value){
-										echo $value;
-										echo " ";
-										echo $key;
-										echo " ";
-									}
-									echo "</span>";
-								}
-								 else{
-								 	echo $value;
-								 }
-								 echo "<br />";						
-							}
-							echo "<br />";
-							?>
-							</div>
-							<?php
-						}
-					?>
 					
+						
+						<?php 
+							foreach($this->data as $key => $value){
+										echo '<div id="leftside" style="float:left;">
+								<img src="http://hdn.xnimg.cn/photos/hdn421/20111205/1525/h_tiny_IM0v_6f9b00029d702f76.jpg" width="50" height="50">
+							</div>';
+									echo '<div id="rightside" style="margin-left: 55px;">';
+							
+										echo "<span style='color:#005EAC'>";
+										echo $value["user"].": ";
+										echo "</span>";
+										echo $value["message"];
+										if(!empty($value["comments"])){
+											?>
+										<div id="comments<?php echo "_".$value["M_id"];?>">												
+											<?php
+											foreach($value["comments"] as $key => $val){
+												echo "<div id='comment'>";
+												echo $val["sent_user"].": ";
+												echo '<span style="color:black">';
+												echo $val["comment"];
+												echo '</span>';													
+												echo "<br />";
+												echo "</div>";
+												
+											}
+										echo '</div>';
+										}	
+											//	echo $val;
+									?>	
+										<textarea id="<?php echo "tweet_".$value["M_id"]; ?>" rows="2" placeholder="Leave comments"></textarea>
+												<input type="submit"  id="sub_com" value="Submit"  />
+												<br />
+									</div>																			
+									<?php
+							}
+						?>
 			</div>
 		</div>		
 		<div class="content tutorials">
-			<div class="profile">
-				<form action="/chichi/public/index/update" method="post"> 
-				<label for="fav_gift">Favorite Gift:</label> 
-				<input type="text" name="fav_gift"  placeholder="<?php if($this->personal->fav_gift){echo $this->personal->fav_gift;} else {echo"Favorite Gift";}?>" value="<?php if($this->personal->fav_gift){echo $this->personal->fav_gift;} else {echo"Favorite Gift";}?>" />
-				<label for="worse_gift">Worse Gift:</label> 
-				<input type="text" name="worse_gift"  placeholder="email@example.com" />
-
-				<label for="website">Personal Blog:</label> 
-				<input type="url" name="website" placeholder="<?php if($this->personal->fav_gift){echo $this->personal->website;} else {echo"Personal Blog";}?>" value="<?php if($this->personal->fav_gift){echo $this->personal->website;} else {echo"Personal Blog";}?>" /> 
-
-				<label for="IQ">IQ:</label> 
-				<input type="number" name="IQ" min="0" max="100" step="1" placeholder="<?php if($this->personal->IQ){echo $this->personal->IQ;} else {echo"IQ";}?>" value="<?php if($this->personal->IQ){echo $this->personal->IQ;} else {echo"IQ";}?>"  />
-
-				<label for="range">EQ:</label> 
-				<input type="range" name="eq" min="0" max="10" step="1" placeholder="<?php if($this->personal->eq){echo $this->personal->eq;} else {echo"EQ";}?>" value="<?php if($this->personal->fav_gift){echo $this->personal->eq;} else {echo"EQ";}?>" />
-
-				<label for="message">Message:</label> 
-				<textarea name="message" />  <?php if($this->personal->message){echo $this->personal->message;} else {echo"Personal Message";}?> </textarea>
-	
-				<input type="submit" value="Send Message" style="background:#33A1DE;" />
-				</form>
+			<div id="product_scrapper">
+									<h1>Share Your Purchases</h1>
+				<div id="left">
+					<form action="/chichi/public/index/product" method="post">
+							<input type="text" id="scrapper" name="scrapper" size="20" />
+							<br />
+							<input type="submit" id="continue" value="" />	
+					</form>			
+					</div>
+					<div id="right">
+							<ul>
+								 <li><img src="/chichi/public/images/bullet.png" />It's totall free</li>
+								 <li><img src="/chichi/public/images/bullet.png" />Let your friends what you have purchased</li>
+								 <li><img src="/chichi/public/images/bullet.png" />What is your favoriate gift</li>
+							</ul>
+					</div>
+					
 			</div>
-	
+			
+
+		
 		</div>
 		<div class="content links">
 			<h1>You may visit</h1>
@@ -355,8 +366,7 @@ function get_time_difference( $start)
 	<div id="header">
 		My Friends
 	</div>
-	<div id="section">
-		
+	<div id="section">		
 			<div id="left_side">
 				<img src="/chichi/public/index/image?id=<?php echo $this->friends[0]->id; ?>" width="50" height="50"/><br />											
 			</div>
@@ -371,18 +381,5 @@ function get_time_difference( $start)
 			</div>
 	</div>
 </div>
-	
-
-
-
-	<script type="text/javascript"> 
-	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-	</script> 
-	<script type="text/javascript"> 
-	try {
-	var pageTracker = _gat._getTracker("UA-3235632-1");
-	pageTracker._trackPageview();
-	} catch(err) {}</script>
 </body>
 </html>

@@ -8,8 +8,12 @@ class IndexController extends Zend_Controller_Action
 	private $check;
 	private $comments;
 	private $personal;
-	private $newUser;
-	private $parse;
+	private $init;
+	private $scrapper;
+	private $peginator;
+	private $example;
+	private $share;
+	private $activity;
 	
 	public function init()
 	{
@@ -20,16 +24,49 @@ class IndexController extends Zend_Controller_Action
 		$this->friends = new Default_Model_userfriends();	
 		$this->comments = new Default_Model_Comments();
 		$this->personal = new Default_Model_Profile();
-		$this->newUser = new Default_Model_Signup();
-		$this->parse = new Default_Model_Parse();
+		$this->init = new Default_Model_Initiialize();
+		$this->inbox = new Default_Model_Inbox();
+		$this->scrapper = new Default_Model_Scrapper();
+		$this->example = new Default_Model_Example();
+		$this->share = new  Default_Model_Share(); 
+		$this->activity = new Default_Model_Activity();
+		
 	}
 	
 	public function indexAction()
 	{
-		echo "testing";
 		if($this->getRequest()->isPost()){
 			$postdata = $this->_request->getPost();
-
+		}
+	}
+	
+	public function kkkAction()
+	{
+	}
+	
+	public function commentsAction()
+	{
+		if($this->getRequest()->isPost()){
+			$postdata = $this->_request->getPost();
+			$ids = explode("_", $postdata["message_id"]);
+			$id = $ids[1];
+			$postdata["message_id"] = $id;
+			$postdata["sent_user"] = $this->session->get_user_email();
+			$postdata["timestamp"] = strtotime("now");
+			$this->comments->inserting($postdata);
+		}
+	}
+	
+	public function inboxAction()
+	{
+		if($this->getRequest()->isPost()){
+			$postdata = $this->_request->getPost();		
+			$data = array("sent_user" => $this->session->get_user_email(), "message" => $postdata["message"], "timestamp" => strtotime("now"));	
+			$id = explode("_", $postdata["email"]);
+			$receive_id = $id[1];
+			$receive_email = $this->check->get_user_byid($receive_id);
+			$this->inbox->set_table(md5($receive_email));
+			$this->inbox->inserting($data);
 		}
 	}
 	
@@ -102,14 +139,18 @@ class IndexController extends Zend_Controller_Action
 	{
 		$ns = $this->session->get_session("Default");
 		$user = $ns->userName;
-		if($user){
+		if(isset($user)){
 			$this->view->current_user = $user;
 			$rows = $this->profile->get_data($user);		
 			$this->view->data = $rows;
 			$row = $this->profile->get_last_message($user);
 			$this->view->latest = $row;
-			$data = $this->personal-> get_profile_byEmail($user);
-			$this->view->personal = $data;
+			$current_user = $this->session->get_user_email();
+		//	$this->view->current_user = $current_user;
+		}
+		if(isset($user)){
+			//$rows = Default_Model_Execute::get_data($user, $this->profile, $this->share);
+			//$this->view->data = $rows;
 		}
 		//$friends_data = $this->friends->get_data();
 		//$this->view->friends = $friends_data;
@@ -120,30 +161,23 @@ class IndexController extends Zend_Controller_Action
 		
 	}
 	
-	public function inboxAction()
-	{
-		if($this->getRequest()->isPost()){
-			$postdata = $this->_request->getPost();
-			$id = $this->parse->parse_byID("inbox", $postdata);
-			echo $id;			
-		}
-	}
-	
 	public function messageAction()
 	{
 		if($this->getRequest()->isPost()){
 			$postdata = $this->_request->getPost();
-			$data = $this->profile->inserting($postdata);			
+			$postdata["date"] = strtotime("now");			
+			$data = $this->profile->inserting($postdata);	
 			$this->view->data = $data;
+			$this->activity->inserting("status_msg", $data);
 		}
 	}
 	
 	
 	public function oopAction()
-	{
-		
-		
+	{		
 	}
+	
+
 	
 	
 	public function updateAction()
@@ -152,8 +186,36 @@ class IndexController extends Zend_Controller_Action
 			$postdata = $this->_request->getPost();
 			$bool = $this->personal->updating($postdata);
 			if($bool == TRUE){
-				$this->_redirect($_SERVER['HTTP_REFERER']);
+				//$this->_redirect($_SERVER['HTTP_REFERER']);
 			}				
+		}
+	}
+	
+	
+	public function scrapperAction()
+	{
+		if($this->getRequest()->isPost()){
+		   $postdata = $this->_request->getPost();
+		   $scrapper = isset($postdata['scrap']) ?  $postdata['scrap'] : '';
+	 	   $data = $this->example->getInfo($scrapper);
+		   $query = $query. "product=".$data[0];
+		   $query = $query ."<br />description=".$data[2];
+		   $query = $query ."<br />price=".$data[1];
+		   foreach($data[3] as $value){
+		   		$query = $query."<br />image=".$value;
+		   }	
+		   
+			echo $query;
+		}
+	}
+	
+	public function productAction()
+	{
+		if($this->getRequest()->isPost()){
+			$postdata = $this->_request->getPost();
+			$scrapper = isset($postdata['scrapper']) ?  $postdata['scrapper'] : '';
+			$data = $this->example->getInfo($scrapper);
+			$this->view->data = $data;
 		}
 	}
 	
@@ -161,32 +223,35 @@ class IndexController extends Zend_Controller_Action
 	
 	public function testAction()
 	{
-		//if($this->getRequest()->isPOST()){
-		//	$scrapper = new Default_Model_Scrapper();
-		//	$postdata = $this->_request->getPost();     
-		//	$product = isset($postdata['product']) ?  $postdata['product'] : '';
-		//	$image = $scrapper->getall($product);
-		//	echo "<img src='".$image."' />";
-		//}
-		
-		
-		if($this->getRequest()->isPost()) {
+		$this->paginator = new Zend_Session_Namespace('Default');			
+		if($this->getRequest()->isPost()) {		
 				$postdata = $this->_request->getPost();
 				$check = new Default_Model_Users();
-				$rows = $check->search($postdata);
-				$this->view->rows = $rows;
-				$this->render("results");
-				//var_dump($rows);
+				$rows = $check->search($postdata);	
+				$this->paginator->searchInput = $rows;
+	
+				$peginator  =  Zend_Paginator::factory($this->paginator->searchInput);
+				$peginator ->setCurrentPageNumber( $this->_getParam('page',1))
+				->setItemCountPerPage(1)
+				->setPageRange(5);
+	
+				$this->view->paginator = $peginator;
+				$this->render("results");	
 		}
 		
-		//	if($this->getRequest()->isPost()){
-		//		$postdata = $this->_request->getPost();
-		//		$message_id = isset($postdata['message_id']) ?  $postdata['message_id'] : '';
-		//		$message_id = explode("tweet_", $message_id);
-			//	$postdata["message_id"] = $message_id[1];
-		//		$this->comments->inserting($postdata);
-		//	}
+		else if(isset($this->paginator->searchInput) && $this->_getParam('page')){
+			$peginator  =  Zend_Paginator::factory($this->paginator->searchInput);	
+			$peginator ->setCurrentPageNumber( $this->_getParam('page',1))
+					   ->setItemCountPerPage(1)
+					   ->setPageRange(5);	
+			$this->view->paginator = $peginator;
+			$this->render("results");
+		}
 		
+		
+		
+		 $info = $this->example->getInfo("http://www.walmart.com/ip/RCA-26-26LA30RQD/15907766");
+		//echo print_r($info);
 		 
 	}
 	
@@ -218,8 +283,7 @@ class IndexController extends Zend_Controller_Action
 					if($row["id"]){
 							$this->session->set_id($row["id"]);
 							$this->session->set_session($user->get_email());
-					}
-				
+					}				
 					$this->_redirect("/index/profile");
 				}	
 			}
@@ -229,53 +293,36 @@ class IndexController extends Zend_Controller_Action
 		 }
 	}
 
+	public function shareAction()
+	{
+			if($this->getRequest()->isPost()){				
+				$postdata = $this->_request->getPost();
+				$data = $this->share->inserting($postdata);
+				$this->activity->inserting("purchases", $data);
+				
+			}		
+	}
+
 	public function signupAction(){
 			
 		if($this->getRequest()->isPost())
 		{
+			$newUser = new Default_Model_Signup();
 			$data = array();
 			$postdata = $this->_request->getPost(); 
-			$email = $postdata["email_address"];
-			foreach ($postdata as $key => $value) {
+			foreach ($postdata as $key => $value){
 				if($key == 'email_address')
 					$key = 'email';
-				$data[$key] = $value;
+					$data[$key] = $value;
 			}
 			$data["user_image"] = is_uploaded_file($_FILES["user_image"]['tmp_name'])?  file_get_contents($_FILES["user_image"]['tmp_name']) : '';
-			$this->newUser->storeData($data);
-			$this->session->set_session($email);
-			$ns = $this->session->get_session();
-			$this->personal->inserting($ns->userName);			 
+			$newUser->storeData($data);
+			$this->init->set_table($data["email"]);
+			$this->init->initialize("dbb");
+			$this->init->init_inbox("inbox");
+			$this->init-> init_confirm("confirm");
 		}
 	}
 
-
-
-public function pdemoAction(){}
-
-public function test1Action(){
-		/*
-			$data = new Default_Model_checkUserName();
-			$rows = $data->showData();
-			echo "mike test";
-			$this->view->rows = $rows;	
-	*/
-	$data = array(
-		  '1','2','3','4','5',
-		  '6','7','8','9','10',
-		  '11','12','13','14','15',
-		  '16','17','18','19','20',
-		  '21','22','23','24','25',
-
-		);// initialize pager with data set
-	
-	$paginator =  $paginator = Zend_Paginator::factory($data);	
-	$paginator->setCurrentPageNumber( $this->_getParam('page',1));
-	$paginator->setItemCountPerPage($this->_getParam('count',2));
-	$this->view->paginator = $paginator;
-	
-
-	
-	}
 	private $is_log_in;		
 }

@@ -13,6 +13,9 @@
 		<div class="result_container">
 			<ol id="friend_list">
 					<?php
+					$this->rows = $this->paginator;
+					
+					
 						foreach($this->rows as $key => $value){
 							
 							$data = explode("hidden_b", $value);
@@ -35,7 +38,12 @@
 							echo "</li>";
 							echo "<br />";
 
+							
 						}
+						
+													echo $this->paginationControl($this->paginator,
+                                        'Sliding',
+                                        'index/paginator_control.phtml'); 
 					?>
 			</ol>			
 		</div>

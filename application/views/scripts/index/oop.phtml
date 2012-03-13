@@ -1,126 +1,47 @@
+<link rel="stylesheet" type="text/css" href="/chichi/public/css/tabs.css" />
+<link rel="stylesheet" type="text/css" href="/chichi/public/css/style.css" />
+<link rel="stylesheet" type="text/css" href="/chichi/public/css/view.css" />
+<link rel="stylesheet" type="text/css" href="/chichi/public/css/gallery.css" />
+<script type="text/javascript" src="/chichi/public/js/jquery.js"></script>
+<script type="text/javascript" src="/chichi/public/js/tabs.js"> </script>
+<script type="text/javascript" src="/chichi/public/js/view.js"> </script>
+<script type="text/javascript" src="/chichi/public/js/gallery.js"> </script>
 
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8" />
-		<meta http-equiv="X-UA-Compatible" content="chrome=1" /><!-- Optimistically rendering in Chrome Frame in IE. -->
-		<style>
-		
-		*:focus{
-			outline:none; /* Prevents blue border in Webkit */
-		}
+<script type="text/javascript">
+$(document).ready(function(){
+	var myImages=new Array( "http://i.walmartimages.com/i/p/00/89/05/98/01/0089059801010_100X100.jpg","http://images.bestbuy.com/BestBuy_US/images/products/3109/3109302_sb.jpg");
+	$('a').click(function() {
+		  	var id = $("img:first").attr("id");
+	 		var str = id.split("_");
+  			if(this.id == "prev"){
+	 			var current = myImages[parseInt(str[3])-1];
+	 			var current_id =  parseInt(str[3])-1;
+	 			$("img:first").attr("id", "current_prod_image_" + current_id); 	
+	 			$("img:first").attr("src", current); 				
+  			}
+  			else if(this.id == "next"){
+	 			var current = myImages[parseInt(str[3])+1];
+	 			var current_id =  parseInt(str[3])+1;
+	 			$("img:first").attr("id", "current_prod_image_" + current_id); 	
+	 			$("img:first").attr("src", current); 
 
-		body {
-			font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; /*  */
-		}
-		
-		#top_bit {
-			width:760px;
-			margin: 0 auto;
-		}
-		
-		form {
-			width:300px;
-			margin: 20px auto;
-		}
+  			}
+	});
+});
+</script> 
 
-		p {
-			line-height: 1.6;
-		}
 
-		input, textarea {
-			font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-			background-color:#fff;
-			border:1px solid #ccc;
-			font-size:20px;
-			width:300px;
-			min-height:30px;
-			display:block;
-			margin-bottom:16px;
-			margin-top:8px;
-			
-			-webkit-border-radius:5px;
-			-moz-border-radius:5px;
-			border-radius:5px;
-			
-			-webkit-transition: all 0.5s ease-in-out;
-			-moz-transition: all 0.5s ease-in-out;
-			transition: all 0.5s ease-in-out;
-		}
-		
-		textarea {
-				min-height:200px;
-		}
 
-		input:focus, textarea:focus {
-			-webkit-box-shadow:0 0 25px #ccc;
-			-moz-box-shadow:0 0 25px #ccc;
-			box-shadow:0 0 25px #ccc;
-			
-			-webkit-transform: scale(1.05);
-			-moz-transform: scale(1.05);
-			transform: scale(1.05);
-		}
-		
-		/* The interesting bit */
-		
-		input:not(:focus), textarea:not(:focus) {
-			opacity:0.5;
-		}
-		
-		input:required, textarea:required {
-			background:url("/tests/formdemo/asterisk_orange.png") no-repeat 280px 7px;						
-		}
+<p></p>
 
-		input:valid, textarea:valid {
-			background:url("/tests/formdemo/tick.png") no-repeat 280px 5px;			
-		}		
 
-		input:focus:invalid, textarea:focus:invalid {
-			background:url("/tests/formdemo/cancel.png") no-repeat 280px 7px;						
-		}
 
-		input[type=submit] {
-			padding:10px;
-			background:none;
-			opacity:1.0;
-		}
-		
-		</style>
-	</head>
-	<body>
-	<form action="formdemo.php" method="post"> 
-		<label for="name">Name:</label> 
-		<input type="text" name="name" required placeholder="Name" />
-		
-		<label for="email">Email:</label> 
-		<input type="email" name="email" required placeholder="email@example.com" />
+<img src="http://i.walmartimages.com/i/p/00/89/05/98/01/0089059801010_100X100.jpg" id="current_prod_image_0" width="150" height="150" />
 
-		<label for="website">Website:</label> 
-		<input type="url" name="website" required placeholder="http://www.example.com" />
 
-		<label for="number">Number:</label> 
-		<input type="number" name="number" min="0" max="10" step="2" required placeholder="Even num < 10">
 
-		<label for="range">Range:</label> 
-		<input type="range" name="range" min="0" max="10" step="2" />
-
-		<label for="message">Message:</label> 
-		<textarea name="message" required></textarea>
-	
-		<input type="submit" value="Send Message" />
-			</form>
-	
-	
-	
-	<script type="text/javascript"> 
-	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-	</script> 
-	<script type="text/javascript"> 
-	try {
-	var pageTracker = _gat._getTracker("UA-3235632-1");
-	pageTracker._trackPageview();
-	} catch(err) {}</script>
-	</body>
-</html>
+<br />
+<br />
+<br />
+<a id="prev" > Prev</a>
+<a id="next" > Next</a>

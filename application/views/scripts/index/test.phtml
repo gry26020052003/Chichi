@@ -22,3 +22,16 @@
 <input type="submit" id="sub_com" />
 </form>
 
+
+
+<?php 
+
+ $tag_pattern =
+            '@<(?P<tag>'."img".')          
+            (?P<attributes>\s[^>]+)?       
+            \s*/?>                  
+            @xsi';
+			
+ echo $tag_pattern;
+			
+			

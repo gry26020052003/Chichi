@@ -226,6 +226,22 @@ border-image: initial;
 	margin-top:5px;
 }
 
+
+#sub_com
+{
+	font-size: 10px;
+	vertical-align: middle;
+	height: 25px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #B8D4E8 #104681 #104681 #B8D4E8;
+	background-color: #005EAC;
+	color: white;
+	cursor: pointer;
+	margin-left:310px;
+	margin-top:-10px;
+}
+
 #friends
 {
 	width:200px;
@@ -339,16 +355,120 @@ border-image: initial;
 			background:url("/tests/formdemo/cancel.png") no-repeat 280px 7px;						
 		}
 
-	.profile	input[type=submit] {
+	.profile    input[type=submit] {
 			padding:10px;
 			background:none;
 			opacity:1.0;
 		}
 		
-	.profile{
-		margin-left:110px;
-		margin-top:25px;
-		background: #F0F5F8;
-		padding:25px;
-		width:400px;
+
+	#db_message_box textarea
+	{
+		overflow-y: auto;
+		color: #888;
+		height: 6px;
+		border: 1px solid #BDC7D8;
+		border-image: initial;
+		font-size:10px;
+		background: #EBF3F7;
+		width: 355px;
+
 	}
+	
+	#db_message_box #comments
+	{
+		margin-top: 10px;
+	}
+	
+	
+	#db_message_box #comment
+	{
+		position: relative;
+		background-color: #F3FAFF;
+		color: #005EAC;
+		padding: 6px;
+		line-height: 1.2em;
+		border-bottom: 1px solid #E6EFF7;
+		width:350px;
+		padding:6px;		
+	}
+	
+	#search_friends
+	{
+		background: white url(http://a.xnimg.cn/imgpro/bg/cs_navtop.png?timestamp=091126) no-repeat left -175px;
+		border: 1px solid #315091;
+		float: left;
+		height: 15px;
+		margin: 0;
+		padding: 3px 4px;
+		width: 149px;
+		margin-top:-5px;
+	}
+	
+	
+	#product_scrapper
+	{
+		background: url('/chichi/public/images/green.jpg'); 
+		width:680px;
+		height: 221px;
+		margin-left:auto;
+		margin-right:auto;
+		margin-top:35px;
+	}
+	
+	
+	#product_scrapper h1
+	{
+		color: white;
+		padding: 22px 0 0 30px;
+		font-weight: bold;
+		font-size: 23px;
+		margin: 0 0 6px 0;
+	}
+	
+	
+	#product_scrapper #scrapper
+	{
+		height: 31px;
+		width: 276px;
+		font-size: 26px;
+		color: black;
+		border: 1px solid #999;
+		text-align: center;
+		padding: 4px 0 2px 0;
+		margin: 0 0 10px 30px;
+	}
+	
+	
+	#product_scrapper #continue
+	{
+		background: url('/chichi/public/images/continue.png'); 
+		width:194px;
+		height:62px;
+		border: 0;
+		margin-left:21px;
+	} 
+	
+	
+	
+	#product_scrapper #left
+	{
+		float: left;
+	}
+	
+	
+	#product_scrapper #right
+	{
+		padding: 0 0 0 30px;
+		margin-left:325px;
+		font-size:18px;
+	} 
+	
+	
+	#product_scrapper #right ul li
+	{	
+		line-height: 22px;
+		font-size:16px;
+	}
+	
+	

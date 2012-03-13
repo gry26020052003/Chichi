@@ -15,11 +15,15 @@ class Default_Model_Session
 	
 	public function get_session()
 	{
-		return new Zend_Session_Namespace('Default');
-				
+		$this->ns =  new Zend_Session_Namespace('Default');
+		return $this->ns;		
 	}
 	
-	
+	public function get_user_email()
+	{
+		$this->ns =  new Zend_Session_Namespace('Default');
+		return $this->ns->userName;
+	}
 	
 	private $ns;
 	private $session;

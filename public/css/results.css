@@ -39,3 +39,21 @@
 {
 	float:right;
 }
+
+
+.paginationControl{
+	margin-top: -10px;
+	width: 900px;
+	float: left;
+}
+
+.paginationControl img{
+	width: 50px; 
+	height: 33px;
+	margin: 0 20px 0 20px;
+	margin-bottom: -11px;
+}
+
+.paginationControl .previousDisable{
+	padding-right: 88px;
+}

@@ -1,0 +1,46 @@
+	<?php if ($this->pageCount): ?>
+	<?php
+	//echo "<pre>";
+	//var_dump($this);
+	?>
+	<div class="paginationControl">
+	<!-- Previous page link -->
+	
+
+
+	<?php if (isset($this->previous)): ?>
+	  <a href="<?php echo $this->url(array('page' => $this->previous)); ?>">
+	   <span> <img class="previous" src="/chichi/public/images/p_previous.png" alt="&lt; Previous" /></span>
+	  </a> 
+	<?php else: ?>
+	  <span class="previousDisable"></span> |
+	<?php endif; ?>
+	
+	
+<span id="pages">
+	<!-- Numbered page links -->
+	<?php foreach ($this->pagesInRange as $page): ?>
+	  <?php if ($page != $this->current): ?>
+	    <a href="<?php echo $this->url(array('page' => $page)); ?>">
+	        <?php echo $page; ?>
+	    </a> |
+	  <?php else: ?>
+	    <?php echo $page; ?> |
+	  <?php endif; ?>
+	<?php endforeach; ?>
+</span>
+	 
+	<!-- Next page link -->
+	
+	<?php if (isset($this->next)): ?>
+	  <a href="<?php echo $this->url(array('page' => $this->next)); ?>">
+	    <img class="next" src="/chichi/public/images/p_next.png" alt="Next &gt;" />
+	  </a>
+	<?php endif; ?>
+	</div>
+
+
+	<?php endif; ?>
+	
+	
+	
