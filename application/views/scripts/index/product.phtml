@@ -3,30 +3,28 @@
 <head>
 	<title>Easy Slider jQuery Plugin Demo</title>
 	<meta http-equiv="content-type" content="text/html;charset=UTF-8" />    
-	<script type="text/javascript" src="/chichi/public/js/jquery.js"></script>
 	<script type="text/javascript" src="/chichi/public/js/product.js"> </script>
 </head>
 <body>
 <form action="/chichi/public/index/share" method="post">
-<table height="50" border="0">
+<table height="50" width="100%" border="0">
 	<tr>
-		<td style="text-align: right;"><h3>Product Name:</h3></td>
+		<td style="text-align: right;"><h4>Product Name:</h4></td>
 		<td><?php echo $this->data[0]; ?></td>	
 	</tr>
 	<tr>
-		<td style="text-align: right;"><h3>Product Description:</h3></td>
+		<td style="text-align: right;"><h4>Product Description:</h4></td>
 		<td><?php echo $this->data[2]; ?></td>	
 	</tr>
 	<tr>
-		<td style="text-align: right;"><h3>Product Price: </h3></td>
+		<td style="text-align: right;"><h4>Product Price: </h4></td>
 		<td><?php echo $this->data[1]; ?></td>
 	</tr>	
 	<tr>
-		<td style="text-align: right;"><h3>Product Image: </h3></td>
-		<td><img src="<?php echo $this->data[3][0]; ?>" width="150" height="150" /></td>
+		<td style="text-align: right;"><h4>Product Image: </h4></td>
+		<td><img src="<?php echo $this->data[3][0]; ?>" width="50" height="50" /></td>
 	</tr>	
-	<tr>
-		
+	<tr height="10">	
 	</tr>
 	<tr>
 		<td></td>
