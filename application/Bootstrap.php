@@ -6,13 +6,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 	protected function _initDB()
 	{		
 		$db = Zend_Db::factory('Pdo_Mysql', array(
-   		'host' => 'localhost',
-                'username' => 'chichio1',
-                'password' => 'dat8tiantianT@',
-                'dbname'   => 'chichio1_MT' ));
-		//'username' => 'tian',
-		//'password' => 'nx349r0x',
-		//'dbname'   => 'tian' ));
+   		//'host' => 'localhost',
+         //       'username' => 'chichio1',
+          //      'password' => 'dat8tiantianT@',
+           //     'dbname'   => 'chichio1_MT' ));
+		'username' => 'tian',
+		'password' => 'nx349r0x',
+		'dbname'   => 'tian' ));
 		Zend_Registry::set('db', $db);
 		Zend_Db_Table_Abstract::setDefaultAdapter($db);
 		
