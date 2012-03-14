@@ -1,4 +1,3 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -9,38 +8,38 @@
 </head>
 <body>
 <form action="/chichi/public/index/share" method="post">
-
-	<?php 
-
-		if(isset($this->data)){
-			echo "<label>Product Name: </label>";
-			echo "<label>". $this->data[0] ."<label>";
+<table height="50" border="0">
+	<tr>
+		<td style="text-align: right;"><h3>Product Name:</h3></td>
+		<td><?php echo $this->data[0]; ?></td>	
+	</tr>
+	<tr>
+		<td style="text-align: right;"><h3>Product Description:</h3></td>
+		<td><?php echo $this->data[2]; ?></td>	
+	</tr>
+	<tr>
+		<td style="text-align: right;"><h3>Product Price: </h3></td>
+		<td><?php echo $this->data[1]; ?></td>
+	</tr>	
+	<tr>
+		<td style="text-align: right;"><h3>Product Image: </h3></td>
+		<td><img src="<?php echo $this->data[3][0]; ?>" width="150" height="150" /></td>
+	</tr>	
+	<tr>
+		
+	</tr>
+	<tr>
+		<td></td>
+		<td><input type="submit" style="background-image:url('/chichi/public/images/button-submit.jpg'); border:0; width:92px; height:16px; cursor:pointer;" value="" /></td>
+	</tr>
+</table>
+<?php
 			echo "<input type='hidden' value='".$this->data[0]."' name='product_title' />";
-			echo "<br />";
-			echo "<label>Product Description:</label>";
-			echo "<label>". $this->data[2] ."<label>";
 			echo "<input type='hidden' value='".$this->data[2]."' name='product_description' />";
-			echo "<br />";
-			echo "<label>Product Price:</label>";
 			echo "<input type='hidden' value='".$this->data[1]."' name='product_price' />";
-			echo "<label>". $this->data[1] ."<label>";
-			echo "<ul id='products_images'>";
-			if(is_array($this->data[3])){
-				foreach($this->data[3] as $key => $value){
-					echo '<input type="hidden" value="'.$value.'"> ';		
-				}
-			}
-			echo '<img src="" id="current" />';	
-			echo "</ul>";		
-		}
-	?>
-	
-	<input type="submit" />
+?>
 </form>
 <br />
-	
-	<a id="prev"> Prev</a>
-	<a id="next" id="next"> Next</a>
 	
 </body>
 </html>

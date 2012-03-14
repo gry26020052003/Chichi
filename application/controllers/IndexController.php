@@ -1,7 +1,7 @@
 <?php
 class IndexController extends Zend_Controller_Action
 {
-	private $profile;
+  private $profile;
 	private $session;
 	private $friends;
 	private $email;
@@ -14,7 +14,7 @@ class IndexController extends Zend_Controller_Action
 	private $example;
 	private $share;
 	private $activity;
-	
+		
 	public function init()
 	{
 		$this->check = new Default_Model_Users();

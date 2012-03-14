@@ -68,7 +68,7 @@ class Default_Model_Example
 			(class_exists($handlerName)) ?	$handlerExists = TRUE : 0;
 		}	
 
-		if ($handlerExists)
+		if (isset($handlerExists))
 		{
 		  	$handler = new $handlerName();
 	  		return $handler->customScraper($xpath, $urlComponents);  
@@ -168,8 +168,11 @@ class Default_Model_Example
 	{	
 		$normalizedUrl = preg_replace('/^www./', '', $urlComponents['host']);
 		$normalizedUrl .= $urlComponents['path'];
-		($urlComponents['query']) ? ($normalizedUrl .= '?') : 0;
-		$normalizedUrl .= $urlComponents['query'];
+		if(isset($urlComponents['query']))
+		{
+			($urlComponents['query']) ? ($normalizedUrl .= '?') : 0;
+			$normalizedUrl .= $urlComponents['query'];
+		}
 		return $normalizedUrl;	
 	}
 
@@ -228,8 +231,10 @@ class Default_Model_Example
 	{
 		$priceMatches = Array();
 		preg_match('/\$\d+\.\d\d/', $pageData, $priceMatches);
-		$firstPrice = $priceMatches[0];
-		return $firstPrice;		
+		if(isset($priceMatches[0]))
+			$firstPrice = $priceMatches[0];
+		if(isset($firstPrice))
+			return $firstPrice;		
 	}
 
 } 
