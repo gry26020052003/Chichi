@@ -137,23 +137,7 @@ class IndexController extends Zend_Controller_Action
 	
 	public function profileAction()
 	{
-		$ns = $this->session->get_session("Default");
-		$user = $ns->userName;
-		if(isset($user)){
-			$this->view->current_user = $user;
-			$rows = $this->profile->get_data($user);		
-			$this->view->data = $rows;
-			$row = $this->profile->get_last_message($user);
-			$this->view->latest = $row;
-			$current_user = $this->session->get_user_email();
-		//	$this->view->current_user = $current_user;
-		}
-		if(isset($user)){
-			//$rows = Default_Model_Execute::get_data($user, $this->profile, $this->share);
-			//$this->view->data = $rows;
-		}
-		//$friends_data = $this->friends->get_data();
-		//$this->view->friends = $friends_data;
+		
 	}
 	
 	public function submitAction()

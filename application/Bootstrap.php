@@ -57,14 +57,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		
 	protected function _initView()	
 	{		
-		//Zend_Layout::startMvc(array('layoutPath' => APPLICATION_PATH.'/layout/','layout' => 'layout'));
-		//$ctrl  = Zend_Controller_Front::getInstance();
-		//$router = $ctrl->getRouter();
-		//		$router->addRoute(
-    	//		'user',
-   	//			 new Zend_Controller_Router_Route('user/:username',
-          //                       			array('controller' => 'user',
-            //                               		  'action' => 'info')));
+		Zend_Layout::startMvc(array('layoutPath' => APPLICATION_PATH.'/layout/','layout' => 'layout'));
+
 	}
 	
 	
