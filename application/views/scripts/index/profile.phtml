@@ -1,38 +1,3 @@
-<?php
-
-function get_time_difference( $start)
-{
-    $uts['start']      =    $start;
-    $uts['end']        =    strtotime("now");
-    if( $uts['start']!==-1 && $uts['end']!==-1 )
-    {
-        if( $uts['end'] >= $uts['start'] )
-        {
-            $diff    =    $uts['end'] - $uts['start'];
-            if( $days=intval((floor($diff/86400))) )
-                $diff = $diff % 86400;
-            if( $hours=intval((floor($diff/3600))) )
-                $diff = $diff % 3600;
-            if( $minutes=intval((floor($diff/60))) )
-                $diff = $diff % 60;
-            $diff = intval( $diff );            
-            return( array('days'=>$days, 'hours'=>$hours, 'minutes'=>$minutes, 'seconds'=>$diff) );
-        }
-        else
-        {
-            trigger_error( "Ending date/time is earlier than the start date/time", E_USER_WARNING );
-        }
-    }
-    else
-    {
-        trigger_error( "Invalid date/time data detected", E_USER_WARNING );
-    }
-    return( false );
-}
-
-?>
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -40,66 +5,10 @@ function get_time_difference( $start)
 <title>Creating a Facebook-like Registration Form with jQuery</title>
 <link rel="stylesheet" type="text/css" href="/chichi/public/css/tabs.css" />
 <link rel="stylesheet" type="text/css" href="/chichi/public/css/style.css" />
-<link rel="stylesheet" type="text/css" href="/chichi/public/css/view.css" />
 <script type="text/javascript" src="/chichi/public/js/jquery.js"></script>
 <script type="text/javascript" src="/chichi/public/js/tabs.js"> </script>
-<script type="text/javascript" src="/chichi/public/js/view.js"> </script>
-<script type="text/javascript" src="/chichi/public/js/slider.js"> </script>
-
-
-<style type="text/css">
-.menu_list {
-	magrin-top:75px;	
-	width: 160px;
-}
-.menu_head {
-	padding: 5px 10px;
-	cursor: pointer;
-	position: relative;
-	margin:1px;
-    font-weight:bold;
-    background: #D2E0EA url(left.png) center right no-repeat;
-}
-.menu_body {
-	display:none;
-}
-.menu_body a{
-  display:block;
-  color:#006699;
-  background-color:#EFEFEF;
-  padding-left:10px;
-  font-weight:bold;
-  text-decoration:none;
-}
-.menu_body a:hover{
-  color: #000000;
-  text-decoration:underline;
-  }
-  
-  #gallery {
-    padding: 30px;
-    background: #e1eef5;
-  }
-  #descriptions {
-    position: relative;
-    height: 50px;
-    background: #EEE;
-    margin-top: 10px;
-    width: 340px;
-    padding: 10px;
-    overflow: hidden;
-  }
-    #descriptions .ad-image-description {
-      position: absolute;
-    }
-      #descriptions .ad-image-description .ad-description-title {
-        display: block;
-      }
-</style>
-
 </head>
 <body>
-	<input type="hidden" value="<?php echo $this->current_user; ?>" id="current_user" />
 	<div id="page-wrap">			
 		<div id="zone-bar">
 			<ul>
@@ -256,52 +165,7 @@ margin-top: -3px;" />
 		</ul>
 		<span class="clear"></span>
 		<div class="content news">
-			<div id="publisher">
-				<textarea id="message" value="What are you doing now?">What are you doing now?</textarea>
-				<input type="submit"  id="msg_submit" value="Submit" />
-				<input type="hidden" value="<?php echo $this->current_user?>" id="current"  />
-			</div>
-	
-			<div style="overflow:auto;" id="db_message_box">
-					
-						
-						<?php 
-							foreach($this->data as $key => $value){
-										echo '<div id="leftside" style="float:left;">
-								<img src="http://hdn.xnimg.cn/photos/hdn421/20111205/1525/h_tiny_IM0v_6f9b00029d702f76.jpg" width="50" height="50">
-							</div>';
-									echo '<div id="rightside" style="margin-left: 55px;">';
-							
-										echo "<span style='color:#005EAC'>";
-										echo $value["user"].": ";
-										echo "</span>";
-										echo $value["message"];
-										if(!empty($value["comments"])){
-											?>
-										<div id="comments<?php echo "_".$value["M_id"];?>">												
-											<?php
-											foreach($value["comments"] as $key => $val){
-												echo "<div id='comment'>";
-												echo $val["sent_user"].": ";
-												echo '<span style="color:black">';
-												echo $val["comment"];
-												echo '</span>';													
-												echo "<br />";
-												echo "</div>";
-												
-											}
-										echo '</div>';
-										}	
-											//	echo $val;
-									?>	
-										<textarea id="<?php echo "tweet_".$value["M_id"]; ?>" rows="2" placeholder="Leave comments"></textarea>
-												<input type="submit"  id="sub_com" value="Submit"  />
-												<br />
-									</div>																			
-									<?php
-							}
-						?>
-			</div>
+		
 		</div>		
 		<div class="content tutorials">
 			<div id="product_scrapper">
@@ -338,48 +202,9 @@ margin-top: -3px;" />
 	</div>
 	
 	
-<div style="width: 200px; margin-top: 100px; margin-left: 1060px;"> <!--This is the second division of right-->
-  <div class="menu_list" id="secondpane" style="width: 200px;"> <!--Code for menu starts here-->
-		<p class="menu_head">Header-1</p>
-		<div class="menu_body">
-		<a href="#">Link-1</a>
-         <a href="#">Link-2</a>
-         <a href="#">Link-3</a>	
-		</div>
-		<p class="menu_head">Header-2</p>
-		<div class="menu_body">
-			<a href="#">Link-1</a>
-         <a href="#">Link-2</a>
-         <a href="#">Link-3</a>	
-		</div>
-		<p class="menu_head">Header-3</p>
-		<div class="menu_body">
-          <a href="#">Link-1</a>
-         <a href="#">Link-2</a>
-         <a href="#">Link-3</a>			
-       </div>
-  </div>      <!--Code for menu ends here-->
-</div>
 
 
-<div id="friends">
-	<div id="header">
-		My Friends
-	</div>
-	<div id="section">		
-			<div id="left_side">
-				<img src="/chichi/public/index/image?id=<?php echo $this->friends[0]->id; ?>" width="50" height="50"/><br />											
-			</div>
-			<div id="right_side">
-						<img src="/chichi/public/index/image?id=<?php echo $this->friends[1]->id; ?>" width="50" height="50"/>
-			</div>
-			<div id="left_side" style="margin-top:10px;">
-						<img  src="/chichi/public/index/image?id=<?php echo $this->friends[0]->id; ?>"width="50" height="50"/>
-			</div>
-			<div id="right_side" style="margin-top:10px;">
-						<img  src="/chichi/public/index/image?id=<?php echo $this->friends[1]->id; ?>" width="50" height="50"/>
-			</div>
-	</div>
-</div>
+
+
 </body>
 </html>
